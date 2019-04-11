@@ -30,6 +30,6 @@ int main()
 	}
 	else
 	{
-		cout << "All 3 numbers have the same value." << endl;
+		cout << "All 3 numbers have the same value or 2 are equal and one inferior." << endl;
 	}
 }
