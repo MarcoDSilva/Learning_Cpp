@@ -3,6 +3,8 @@ Repository with the exercises to the EFA Programming course.
 
 [**temperature**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/temp.cpp) - A simple representation of a weather temperature, where each 2 degrees are represented with "#" and if the temperature isn't even the remainder is represented with "+".
 
+[**compare_ints**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/compare_ints.cpp) - Asks the user for 3 numbers and checks which one is the bigger.
+
 [**exe1**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/exe1.cpp) - program where you ask for a number, and return it to the user.
 
 [**exe2**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/exe2.cpp) - program where you pick 2 numbers and return them to the user.
