@@ -9,7 +9,7 @@ Repository with the exercises to the EFA Programming course.
 
 -----------------------------------
 
-Most basic exercises below
+**Most basic exercises below**:
 
 [**fahrenheit_celsius**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/fahrenheit_celsius.cpp) - converts celsius to fahrenheit.
 
