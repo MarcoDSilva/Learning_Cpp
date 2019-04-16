@@ -11,6 +11,8 @@ Repository with the exercises to the EFA Programming course.
 
 **Most basic exercises below**:
 
+[**P0**](https://github.com/MarcoDSilva/Learning_Cpp/blob/master/p0.cpp) - ask the user for 2 names and 2 ages, returns the name of the oldest people between them, and shows if any is under 18y old.
+
 [**fahrenheit_celsius**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/fahrenheit_celsius.cpp) - converts celsius to fahrenheit.
 
 [**pythagoras**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/pythagoras.cpp) - gets 2 legs to calculate the triangle rect side.
