@@ -1,7 +1,7 @@
 # Programming-Course-Exercises
 Repository with the exercises am doing to learn C++
 
-
+[**temperature conversion**](https://github.com/MarcoDSilva/Learning_Cpp/blob/master/temperature_converter.cpp) - program that converts between celsius/fahrenheit/kelvin.
 
 [**Multiplication tables game**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/multiplication_tables_game.cpp) - Multiplication tables game. User needs to have the correct answer 3 times to win, if he fails once, loses 2 points.
 
@@ -14,8 +14,6 @@ Repository with the exercises am doing to learn C++
 **Most basic exercises below**:
 
 [**P0**](https://github.com/MarcoDSilva/Learning_Cpp/blob/master/p0.cpp) - ask the user for 2 names and 2 ages, returns the name of the oldest people between them, and shows if any is under 18y old.
-
-[**fahrenheit_celsius**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/fahrenheit_celsius.cpp) - converts celsius to fahrenheit.
 
 [**pythagoras**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/pythagoras.cpp) - gets 2 legs to calculate the triangle rect side.
 
