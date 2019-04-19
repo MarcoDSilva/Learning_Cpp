@@ -13,7 +13,7 @@ Repository with the exercises am doing to learn C++
 
 **Most basic exercises below**:
 
-[**P0**](https://github.com/MarcoDSilva/Learning_Cpp/blob/master/p0.cpp) - ask the user for 2 names and 2 ages, returns the name of the oldest people between them, and shows if any is under 18y old.
+[**P1**](https://github.com/MarcoDSilva/Learning_Cpp/blob/master/p1.cpp) - gets 3 names and 3 ages, compare the users and returns the oldest (if there is one between them), and how many users are of adult age. (18+)
 
 [**pythagoras**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/pythagoras.cpp) - gets 2 legs to calculate the triangle rect side.
 
