@@ -21,7 +21,7 @@ Repository with the exercises am doing to learn C++
 
 [**compare_ints**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/compare_ints.cpp) - Asks the user for 3 numbers and checks which one is the bigger.
 
-[**IMC**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/IMC.cpp) - basic IMC calculator.
+[**IMC**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/IMC.cpp) - IMC calculator and verifies if user is around expected values.
 
 [**secs_to_hour**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/secs_to_hour.cpp) - convert the input seconds to (hour/min/sec), with a while loop.
 
