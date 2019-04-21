@@ -1,5 +1,5 @@
-# Programming-Course-Exercises
-Repository with the exercises am doing to learn C++
+# Learning C++
+Repository with the exercises am doing to learn C++.
 
 [**temperature conversion**](https://github.com/MarcoDSilva/Learning_Cpp/blob/master/temperature_converter.cpp) - program that converts between celsius/fahrenheit/kelvin.
 
@@ -15,9 +15,9 @@ Repository with the exercises am doing to learn C++
 
 [**P1**](https://github.com/MarcoDSilva/Learning_Cpp/blob/master/p1.cpp) - gets 3 names and 3 ages, compare the users and returns the oldest (if there is one between them), and how many users are of adult age. (18+)
 
-[**pythagoras**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/pythagoras.cpp) - gets 2 legs to calculate the triangle rect side.
+[**parking lot**](https://github.com/MarcoDSilva/Learning_Cpp/blob/master/parking_lot_calc.cpp) - Calculates how much the user has to pay depending on how many hours/minutes the car was parked. First hour is 2€, second hour 1.5€, hours afterwards are 1€. Needs to be fixed.
 
-[**compare_ints**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/compare_ints.cpp) - Asks the user for 3 numbers and checks which one is the bigger.
+[**pythagoras**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/pythagoras.cpp) - gets 2 legs to calculate the triangle rect side.
 
 [**IMC**](https://github.com/MarcoDSilva/Programming-Course-Exercises/blob/master/IMC.cpp) - IMC calculator and verifies if user is around expected values.
 
