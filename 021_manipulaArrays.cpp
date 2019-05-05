@@ -9,12 +9,17 @@
 #include<ctype.h>
 
 using namespace std;
-int ARRAY_SIZE = 21;
-
+const int ARRAY_SIZE = 21;
 
 //-------------------------- função lista inicial -------------------------
+void slash()
+{
+	cout << "--------------------------------------\n";
+}
+
 void menu()
 {
+	slash();
 	cout << "MANIPULAR ARRAY COM NOMES.\n\n";
 	cout << "\t 1 = Listar todos os nomes\n";
 	cout << "\t 2 = Lê 1 nome para uma posição.\n";
@@ -24,6 +29,7 @@ void menu()
 	cout << "\t 6 = Todos os nomes para letras maiusculas\n";
 	cout << "\t 7 = Todos os nomes para letras minusculas\n\n";
 	cout << "Pressione ESC para terminar o programa.\n";
+	slash();
 }
 
 int main()
@@ -55,6 +61,7 @@ int main()
 			{
 				cout << i << " - " << nomes[i] << endl;
 			}
+			slash();
 			break;
 
 		//---------------------------- user escolhe a posição, dá um novo nome, e dá update na lista
@@ -73,13 +80,12 @@ int main()
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					cin >> procura_position;
 			}
-			
-
 			cout << "Qual o nome que pretende dar? ";	
 			cin >> novo_nome;
 
 			//update no nome
 			nomes[procura_position] = novo_nome;
+			slash();
 			break;
 
 		//---------------------------- lista número, nome, comprimento em letras
@@ -88,6 +94,7 @@ int main()
 			{
 				cout << "Nome " << i << " " << nomes[i] << "\t\t" << nomes[i].size() << endl;
 			}
+			slash();
 			break;
 
 		//--------------------------- qual o maior nome
@@ -100,7 +107,8 @@ int main()
 					longest_name = nomes[i];
 				}
 			}
-			cout << "O maior nome da lista é " << longest_name << " com " << biggest_name << " letras!\n\n";
+			cout << "O maior nome da lista é " << longest_name << " com " << biggest_name << " letras!\n";
+			slash();
 			break;
 
 		//--------------------------le nome, e procura a existencia dele na lista
@@ -123,6 +131,7 @@ int main()
 			{
 				cout << "O nome não existe na lista\n\n";
 			}
+			slash();
 			break;
 		//------------------------ todos os nomes para uppercase
 		case 54:
@@ -136,7 +145,7 @@ int main()
 				}
 				cout << temp_name << "\n";
 			}
-			cout << "\n";
+			slash();
 			break;
 
 		//------------------------- todos os nomes para lowercase
@@ -151,11 +160,15 @@ int main()
 				}
 				cout << temp_name << "\n";
 			}
-			cout << "\n";
+			slash();
 			break;
+		//---------------------- default
 		default:
-			menu();
-			break;
+			if (key_press != 27)
+			{
+				menu();
+				break;
+			}
 		}
 	} while (key_press != 27); //escape isn't pressed
 	
