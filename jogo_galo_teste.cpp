@@ -7,15 +7,15 @@ const int MAX_SIZE = 3;
 
 // ---------------------- functions ----------------
 int primeiroTurno();
+bool finder(bool victory);
 
 int main()
 {
 	//---- variables ----
-	char board[MAX_SIZE][MAX_SIZE] = {'1','2','3','4','5','6','7','8','9'}, x = 'X', o = 'O';
+	char board[MAX_SIZE][MAX_SIZE] = { '1','2','3','4','5','6','7','8','9' }, x = 'X', o = 'O';
 	string player1 = "", player2 = "";
 	bool victory = false, draw = false, jogadorX = false;
 	int turn = 1, playerChoice = 0;
-	
 
 	//-------------------------------- nomes jogadores
 	cout << "Insira nome do jogador 1: ";	cin >> player1;
@@ -31,10 +31,9 @@ int main()
 		cout << "|";
 		for (int j = 0; j < MAX_SIZE; j++)
 		{
-			
+
 			cout << board[i][j] << "|";
 		}
-
 		cout << "\n";
 	}
 
@@ -56,7 +55,6 @@ int main()
 		}
 
 		//impedir jogador de jogar no mesmo spot
-		//caso uma das opções preencha uma linha ou uma coluna, passar a boolean da vitoria para true
 
 		//logica para receber jogada
 		for (int i = 0; i < MAX_SIZE; i++)
@@ -113,14 +111,50 @@ int main()
 		}
 
 		turn = turn + 1; //actualizar turno
-		
+
+		//caso uma das opções preencha uma linha ou uma coluna, passar a boolean da vitoria para true
+		if (board[0][0] == board[0][1] && board[0][1] == board[0][2] && (board[0][0] != '1'))
+		{
+			victory = finder(victory);
+		}
+		else if (board[1][0] == board[1][1] && board[1][1] == board[1][2] && (board[1][0] != '4'))
+		{
+			victory = finder(victory);
+		}
+		else if (board[2][0] == board[2][1] && board[2][1] == board[2][2] && (board[2][0] != '7'))
+		{
+			victory = finder(victory);
+		}
+		else if (board[0][0] == board[1][0] && board[1][0] == board[2][0] && (board[0][0] != '1'))
+		{
+			victory = finder(victory);
+		}
+		else if (board[0][1] == board[1][1] && board[1][1] == board[2][1] && (board[0][1] != '2'))
+		{
+			victory = finder(victory);
+		}
+		else if (board[0][2] == board[1][2] && board[1][2] == board[2][2] && (board[0][2] != '3'))
+		{
+			victory = finder(victory);
+		}
+		else if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && (board[0][0] != '1'))
+		{
+			victory = finder(victory);
+		}
+		else if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && (board[0][2] != '3'))
+		{
+			victory = finder(victory);
+		}
+
 		//-------------------------------------- checking moves and win condition
 		if (turn > 9 && !victory)
 		{
 			draw = true;
 		}
-		
+
 	} while (!victory && !draw);
+}
+
 // ----------------------- rng para escolher o primeiro jogador a actuar -----------------
 int primeiroTurno()
 {
@@ -130,4 +164,11 @@ int primeiroTurno()
 	turn = rand() % 2;
 
 	return turn;
+}
+
+bool finder(bool victory)
+{
+	victory = true;
+	cout << "Vencedor encontrado!\n\n";
+	return victory;
 }
