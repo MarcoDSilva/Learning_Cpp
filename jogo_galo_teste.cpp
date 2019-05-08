@@ -121,6 +121,7 @@ int main()
 		}
 		
 	} while (!victory && !draw);
+}
 // ----------------------- rng para escolher o primeiro jogador a actuar -----------------
 int primeiroTurno()
 {
