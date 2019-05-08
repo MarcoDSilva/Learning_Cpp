@@ -3,31 +3,33 @@
 #include<time.h>
 using namespace std;
 
+const int MAX_SIZE = 3;
+
 // ---------------------- functions ----------------
 int primeiroTurno();
 
 int main()
 {
 	//---- variables ----
-	string board[3][3] = { "1","2","3","4","5","6","7","8","9"};
-	string x = "X", o = "O", player1 = "", player2 = "";
+	char board[MAX_SIZE][MAX_SIZE] = {'1','2','3','4','5','6','7','8','9'}, x = 'X', o = 'O';
+	string player1 = "", player2 = "";
 	bool victory = false, draw = false, jogadorX = false;
-	int turn = primeiroTurno(), playerChoice = 0;
+	int turn = 1, playerChoice = 0;
 	
 
 	//-------------------------------- nomes jogadores
 	cout << "Insira nome do jogador 1: ";	cin >> player1;
-	cout << "\nBem vindo jogador/a " << player1 << ".\n";
+	cout << "Bem vindo jogador/a " << player1 << ".\n";
 	cout << "Insira nome do jogador 2: "; cin >> player2;
-	cout << "\nBem vindo jogador/a " << player2 << ".\n";
+	cout << "Bem vindo jogador/a " << player2 << ".\n";
 	cout << "Jogador/a " << player1 << " vai utilizar " << x << " e jogador/a " << player2 << " vai utilizar " << o << "\n\n";
 	cout << "Exemplo da tabela de jogo em baixo. \nCada jogador escolhe um número por turno, de 1 a 9, e a respectiva marca irá aparecer. \nBoa sorte jogadores!\n\n\n";
 
 	//--------------------------------- desenha a tabela
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < MAX_SIZE; i++)
 	{
 		cout << "|";
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < MAX_SIZE; j++)
 		{
 			
 			cout << board[i][j] << "|";
@@ -36,7 +38,7 @@ int main()
 		cout << "\n";
 	}
 
-	//do while enquanto a boolen vitoria não for true
+	//do while enquanto a boolen vitoria/empate não for verdadeira
 	do
 	{
 		//verificação de turno para chamar o jogador correspondente
@@ -53,10 +55,13 @@ int main()
 			jogadorX = false;
 		}
 
+		//impedir jogador de jogar no mesmo spot
+		//caso uma das opções preencha uma linha ou uma coluna, passar a boolean da vitoria para true
+
 		//logica para receber jogada
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < MAX_SIZE; i++)
 		{
-			for (int j = 0; j < 3; j++)
+			for (int j = 0; j < MAX_SIZE; j++)
 			{
 				if (playerChoice == 1 || playerChoice == 2 || playerChoice == 3)
 				{
@@ -69,7 +74,7 @@ int main()
 						board[0][playerChoice - 1] = o;
 					}
 				}
-				else if (playerChoice == 4 || playerChoice == 5 || playerChoice == 6)
+				if (playerChoice == 4 || playerChoice == 5 || playerChoice == 6)
 				{
 					if (jogadorX)
 					{
@@ -80,7 +85,7 @@ int main()
 						board[1][playerChoice - 4] = o;
 					}
 				}
-				else if (playerChoice == 7 || playerChoice == 8 || playerChoice == 9)
+				if (playerChoice == 7 || playerChoice == 8 || playerChoice == 9)
 				{
 					if (jogadorX)
 					{
@@ -92,13 +97,13 @@ int main()
 					}
 				}
 			}
-			turn++; //actualizar turno
 		}
-		// update tabela
-		for (int i = 0; i < 3; i++)
+
+		// ----------------------------- update tabela para utilizador após jogada
+		for (int i = 0; i < MAX_SIZE; i++)
 		{
 			cout << "|";
-			for (int j = 0; j < 3; j++)
+			for (int j = 0; j < MAX_SIZE; j++)
 			{
 
 				cout << board[i][j] << "|";
@@ -107,18 +112,15 @@ int main()
 			cout << "\n";
 		}
 
-	} while (!victory || turn < 9);
-	
-
-
-	//pedir input ao user e devolver onde foi posta a opção
-
-	// opção X e O, 1x por utilizador (turno par vs turno impar)
-	//caso uma das opções preencha uma linha ou uma coluna, passar a boolean da vitoria para true
-
-	
-}
-
+		turn = turn + 1; //actualizar turno
+		
+		//-------------------------------------- checking moves and win condition
+		if (turn > 9 && !victory)
+		{
+			draw = true;
+		}
+		
+	} while (!victory && !draw);
 // ----------------------- rng para escolher o primeiro jogador a actuar -----------------
 int primeiroTurno()
 {
