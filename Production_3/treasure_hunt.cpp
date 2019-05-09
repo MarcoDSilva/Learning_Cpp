@@ -19,12 +19,14 @@ void clear_board();
 void searcher(char x);
 
 // ----- global matrix ---
-char board[MAX_SIZE][MAX_SIZE] = {'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'};
+char board[MAX_SIZE][MAX_SIZE] = {};
 
 int main()
 {
 	//---consola lingua portuguesa ----
 	setlocale(LC_ALL, "Portuguese");
+
+	srand(time(NULL)); //pseudo random
 
 	//-----variaveis ---------
 	char key;
@@ -71,12 +73,30 @@ int main()
 		case 'm':
 		case 'M':
 			menu();
+			break;
+		// ---------------- reservadas
+		case 'x':
+		case 'X':
+			cout << "RESERVADO\n";
+			break;
+
+		// ---------------- reservadas
+		case 'y':
+		case 'Y':
+			cout << "RESERVADO\n";
+			break;
+
+		// ---------------- reservadas
+		case 'z':
+		case 'Z':
+			cout << "RESERVADO\n";
+			break;
 
 		//--- if all else fails ---
 		default:
 			if (key != 27)
 			{
-				cout << "\nopção não reconhecida!\n";
+				cout << "\nopção não reconhecida! Pressione M para ver as opções.\n";
 			}
 		}
 	} while (key != 27);
@@ -94,6 +114,9 @@ void menu()
 	cout << "Opção T - move o tesouro para uma nova posição.\n";
 	cout << "Opção B - move a bomba para uma nova posição.\n";
 	cout << "Opção M - mostra o menu das opções\n";
+	cout << "Opção X - reservado\n";
+	cout << "Opção Y - reservado\n";
+	cout << "Opção Z - reservado\n";
 	cout << "Opção ESC - termina o jogo.\n";
 	cout << "-------------------------------------------\n";
 }
@@ -101,7 +124,6 @@ void menu()
 // ------ cria uma bomba nova ------
 void new_bomb()
 {
-	srand(time(NULL));
 	int x, y;
 	x = rand() % 5;
 	y = rand() % 5;
@@ -124,7 +146,6 @@ void new_bomb()
 // ------ cria um tesouro novo -------
 void new_treasure()
 {
-	srand(time(NULL));
 	int x, y;
 	x = rand() % 5;
 	y = rand() % 5;
@@ -133,7 +154,7 @@ void new_treasure()
 	searcher('T');
 
 	//condição caso a board tenha um T ou um B no sitio, caso contrário, a função chama-se a si própria para inserir o tesouro
-	if ((board[x][y] != 'T') && (board[x][y] != 'B'))
+	if ((board[x][y] != 'B') && (board[x][y] != 'T'))
 	{
 		board[x][y] = 'T';
 	}
@@ -168,7 +189,7 @@ void clear_board()
 	{
 		for (int j = 0; j < MAX_SIZE; j++)
 		{
-			board[i][j] = '-';
+			board[i][j] = ' ';
 		}
 	}
 	cout << "O tabuleiro de jogo foi limpo. Pode inserir novo tesouro/bomba e boa sorte!\n";
@@ -183,7 +204,7 @@ void searcher(char x)
 		{
 			if (board[i][j] == x)
 			{
-				board[i][j] = '-';
+				board[i][j] = ' ';
 			}
 		}
 	}
