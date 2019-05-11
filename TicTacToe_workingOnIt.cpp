@@ -5,60 +5,51 @@
 #include<time.h>
 using namespace std;
 
+//constant for board max size in both axis
 const int MAX_SIZE = 3;
 
 // ---------------------- functions ----------------
-int primeiroTurno();
 bool finder(bool victory);
 void winCheck();
-char playerPick(bool player, char play);
+char playerPick(bool player);
 void crossOrO(int play, char move);
 void boardUpdated();
+int turnChecker(int turn, bool playerTurn, string firstPlayer, string secondPlayer);
+void placementVerification(int pick);
+
 
 //------ global vars for test ----
-char board[MAX_SIZE][MAX_SIZE] = { '1','2','3','4','5','6','7','8','9' };
-bool victory = false, draw = false;
+char board[MAX_SIZE][MAX_SIZE] = { '-','-','-','-','-','-','-','-','-' };
+bool victory = false, draw = false, playerXcross = false;
 
 int main()
 {
 	//---- variables ----
 	string player1 = "", player2 = "";
 	char play = ' ';
-	bool jogadorX = false;
 	int turn = 1, playerChoice = 0;
 
-	//-------------------------------- nomes jogadores
-	cout << "Insira nome do jogador 1: ";	cin >> player1;
-	cout << "Bem vindo jogador/a " << player1 << ".\n";
-	cout << "Insira nome do jogador 2: "; cin >> player2;
-	cout << "Bem vindo jogador/a " << player2 << ".\n";
-	cout << "Jogador/a " << player1 << " vai utilizar X e jogador/a " << player2 << " vai utilizar O \n\n";
-	cout << "Exemplo da tabela de jogo em baixo. \nCada jogador escolhe um número por turno, de 1 a 9, e a respectiva marca irá aparecer. \nBoa sorte jogadores!\n\n\n";
+	//-------------------------------- player names
+	cout << "Insert name - player 1: ";	cin >> player1;
+	cout << "Welcome player " << player1 << ".\n";
+	cout << "Insert name - player 2: "; cin >> player2;
+	cout << "Welcome player " << player2 << ".\n";
+	cout << "Player " << player1 << " will be the one with the X plays and player " << player2 << " will use the O play.\n\n";
+	cout << "Board example below. \nEach player picks his coordinate from 1 to 9 and the respective play will be marked. (X or O) \nGood luck players!\n\n\n";
 
 	//brings the board
 	boardUpdated();
 
-	//do while enquanto a boolen vitoria/empate não for verdadeira
+	//until no winner/draw is reached, the game will continue (9 turns max)
 	do
 	{
-		//verificação de turno para chamar o jogador correspondente
-		if (turn % 2 == 0)
-		{
-			cout << player1 << " escolha a jogada que quer efectuar.";
-			cin >> playerChoice;
-			jogadorX = true;
-		}
-		else
-		{
-			cout << player2 << " escolha a jogada que quer efectuar.";
-			cin >> playerChoice;
-			jogadorX = false;
-		}
+		//verifies which turn is and calls the corresponding user
+		playerChoice = turnChecker(turn, playerXcross, player1, player2);
 
-		//pickingPlay
-		play = playerPick(jogadorX, play);
+		//pickings the play from user
+		play = playerPick(playerXcross);
 
-		//logica para receber jogada
+		//loop the matrix and makes the play
 		for (int i = 0; i < MAX_SIZE; i++)
 		{
 			for (int j = 0; j < MAX_SIZE; j++)
@@ -67,30 +58,18 @@ int main()
 			}
 		}
 
-		// shows updated board and checks the winning condition after the user move
+		// shows the updated board and verifies if the winning condition after the user move was reached
 		boardUpdated();
 		winCheck();
 		turn = turn + 1;
 
-		//checks turns and draw
+		//checks if enough turns were played and the winning condition , to finish the game in case a draw happened
 		if (turn > 9 && !victory)
 		{
 			draw = true;
 			cout << "it's a draw!!!\n";
 		}
-
 	} while (!victory && !draw);
-}
-
-// ----------------------- rng para escolher o primeiro jogador a actuar -----------------
-int primeiroTurno()
-{
-	int turn;
-	srand(time(NULL));
-
-	turn = rand() % 2;
-
-	return turn;
 }
 
 //shows board
@@ -98,13 +77,12 @@ void boardUpdated()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
-		cout << "|";
+		cout << "\t|";
 		for (int j = 0; j < MAX_SIZE; j++)
 		{
 
 			cout << board[i][j] << "|";
 		}
-
 		cout << "\n";
 	}
 }
@@ -120,57 +98,56 @@ bool finder(bool victory)
 //checks winning condition
 void winCheck()
 {
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		for (int j = 0; j < MAX_SIZE; j++)
+		{
+			if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != '-')
+			{
+				victory = finder(victory);
+				break;
+			}
+		}
+	}
+
 	//caso uma das opções preencha uma linha ou uma coluna, passar a boolean da vitoria para true
-	if (board[0][0] == board[0][1] && board[0][1] == board[0][2] && (board[0][0] != '1'))
+	if (board[0][0] == board[1][0] && board[1][0] == board[2][0] && (board[0][0] != '-'))
 	{
 		victory = finder(victory);
 	}
-	else if (board[1][0] == board[1][1] && board[1][1] == board[1][2] && (board[1][0] != '4'))
+	else if (board[0][1] == board[1][1] && board[1][1] == board[2][1] && (board[0][1] != '-'))
 	{
 		victory = finder(victory);
 	}
-	else if (board[2][0] == board[2][1] && board[2][1] == board[2][2] && (board[2][0] != '7'))
+	else if (board[0][2] == board[1][2] && board[1][2] == board[2][2] && (board[0][2] != '-'))
 	{
 		victory = finder(victory);
 	}
-	else if (board[0][0] == board[1][0] && board[1][0] == board[2][0] && (board[0][0] != '1'))
+	else if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && (board[0][0] != '-'))
 	{
 		victory = finder(victory);
 	}
-	else if (board[0][1] == board[1][1] && board[1][1] == board[2][1] && (board[0][1] != '2'))
-	{
-		victory = finder(victory);
-	}
-	else if (board[0][2] == board[1][2] && board[1][2] == board[2][2] && (board[0][2] != '3'))
-	{
-		victory = finder(victory);
-	}
-	else if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && (board[0][0] != '1'))
-	{
-		victory = finder(victory);
-	}
-	else if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && (board[0][2] != '3'))
+	else if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && (board[0][2] != '-'))
 	{
 		victory = finder(victory);
 	}
 }
 
-//picks the player correct corresponding character
-char playerPick(bool playerX, char play)
+//returns the mark after the user picks his move. 
+char playerPick(bool playerX)
 {
-	bool px = playerX;
-	char pC = play;
-	if (px)
+	bool playerIsXorO = playerX;
+	char playMark = ' ';
+	if (playerIsXorO)
 	{
-		pC = 'X';
+		playMark = 'X';
 	}
 	else
 	{
-		pC = 'O';
+		playMark = 'O';
 	}
-	return pC;
+	return playMark;
 }
-
 
 //puts the option in the right position
 void crossOrO(int play, char move)
@@ -190,4 +167,31 @@ void crossOrO(int play, char move)
 	{
 		board[2][playerChoice - 7] = mo;
 	}
+}
+
+//verifies which turn is and calls the right user to make his move
+int turnChecker(int turn, bool playerTurn, string firstPlayer, string secondPlayer)
+{
+	int turnCheck = turn, playerChoice = 0;
+	string player1 = firstPlayer, player2 = secondPlayer;
+
+	if (turn % 2 == 0)
+	{
+		cout << player1 << " pick the move you want to make.";
+		cin >> playerChoice;
+		playerXcross = true;
+	}
+	else
+	{
+		cout << player2 << " pick the move you want to make.";
+		cin >> playerChoice;
+		playerXcross = false;
+	}
+	return playerChoice;
+}
+
+// verifies if the user choice is available
+void placementVerification(int pick)
+{
+
 }
