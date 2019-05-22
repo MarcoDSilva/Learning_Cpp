@@ -30,7 +30,7 @@ int main()
 
 		switch (key_press)
 		{
-		case '1': 
+		case '1':
 			inicializeArray();
 			break;
 
@@ -135,43 +135,43 @@ void inicializeArray()
 	people[19][2] = "Male";
 
 	//forth for age
-	people[0][3] = "32";
-	people[1][3] = "9";
-	people[2][3] = "82";
-	people[3][3] = "5";
-	people[4][3] = "24";
-	people[5][3] = "71";
-	people[6][3] = "66";
-	people[7][3] = "86";
-	people[8][3] = "1";
-	people[9][3] = "45";
-	people[10][3] = "42";
-	people[11][3] = "94";
-	people[12][3] = "78";
-	people[13][3] = "1";
-	people[14][3] = "88";
-	people[15][3] = "52";
-	people[16][3] = "16";
-	people[17][3] = "27";
-	people[18][3] = "39";
-	people[19][3] = "25";
+	people[0][3] = "1987";
+	people[1][3] = "2010";
+	people[2][3] = "1937";
+	people[3][3] = "2014";
+	people[4][3] = "1993";
+	people[5][3] = "1948";
+	people[6][3] = "1953";
+	people[7][3] = "1933";
+	people[8][3] = "2018";
+	people[9][3] = "1974";
+	people[10][3] = "1977";
+	people[11][3] = "1925";
+	people[12][3] = "1941";
+	people[13][3] = "2018";
+	people[14][3] = "1931";
+	people[15][3] = "1967";
+	people[16][3] = "2003";
+	people[17][3] = "1992";
+	people[18][3] = "1980";
+	people[19][3] = "1994";
 
 	cout << "The array was initialized. You can press 2 to see the values.\n\n";
 }
 
 void listArray()
 {
-	cout << "----------------------------------------------------------------------------------\n";
-	cout << "Nº NAME\t\t\t      COUNTRY\t\t	SEX\t    YEAR\n";
+	cout << "-----------------------------------------------------------------------\n";
+	cout << "N.   NAME\t\t\t  COUNTRY\t\tSEX\t   YEAR\n";
 	for (int i = 0; i < 20; i++)
 	{
-		cout << left << setw(2) << setfill(' ') << i + 1 << ": " 
+		cout << left << setw(2) << setfill(' ') << i + 1 << ": "
 			<< setw(25) << setfill('.') << people[i][0] << left
-			<< setw(25) << setfill(' ') << people[i][1] << left 
-			<< setw(15) << setfill (' ') << people[i][2] << left 
+			<< setw(25) << setfill(' ') << people[i][1] << left
+			<< setw(15) << setfill(' ') << people[i][2] << right
 			<< setw(2) << setfill(' ') << people[i][3] << endl;
 	}
-
+	cout << "-----------------------------------------------------------------------\n";
 }
 
 void newFile()
@@ -181,5 +181,6 @@ void newFile()
 
 void verifyOldest()
 {
-
+	int maior = 0;
+	
 }
