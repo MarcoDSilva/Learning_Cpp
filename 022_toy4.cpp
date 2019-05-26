@@ -182,19 +182,27 @@ void listArray()
 	cout << "-----------------------------------------------------------------------\n";
 }
 
+//gets the user info in temp values, gets the position to update , then updates the info where the user wants
 void newFile()
 {
-	//new file
+	int pick = 0, temp_year = 0;
+	string temp_name, temp_country, temp_sex;
 
-	//name
+	cout << "NEW USER:\n";
+	cout << "Name: ";	cin >> temp_name;
+	cout << "Country: ";	cin >> temp_country;
+	cout << "Sex ";	cin >> temp_sex;
+	cout << "Year of Birth: ";	cin >> temp_year;
+	cout << "In which line you want to update this new user (1 to 20): ";	cin >> pick;
 
-	//country
+	pick--;  // we are asking the user from input 1 to 20, but our object starts at 0
 
-	// sex
+	map[pick].name = temp_name;
+	map[pick].country = temp_country;
+	map[pick].sex = temp_sex;
+	map[pick].year = temp_year;
 
-	//age
-
-	//in which position from 1-20 you want to update this info
+	cout << "The user was updated. Pick 2 to see the updated user list.\n";
 }
 
 // to verify the oldest member , loops through all 20 people
