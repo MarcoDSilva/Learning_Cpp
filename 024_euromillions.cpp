@@ -15,10 +15,10 @@ int main()
 	//gens random number, if there is any equal between the first 2, rngs it (MAY STILL GET A REPEATED ONE)
 	for (int i = 0; i < 5; i++)
 	{
-		numbers[i] = rand() % 49 + 1;
+		numbers[i] = rand() % 50 + 1;
 		if (numbers[i] == numbers[i + 1])
 		{
-			numbers[i] = rand() % 49 + 1;
+			numbers[i] = rand() % 50 + 1;
 		}
 	}
 
@@ -54,12 +54,12 @@ int main()
 	//rng stars 
 	for (int i = 0; i < 2; i++)
 	{
-		stars[i] = rand() % 11 + 1;
+		stars[i] = rand() % 12 + 1;
 	}
 
 	while (stars[0] == stars[1])
 	{
-		stars[0] = rand() % 11 + 1;
+		stars[0] = rand() % 12 + 1;
 	}
 
 	if (stars[1] < stars[0])
