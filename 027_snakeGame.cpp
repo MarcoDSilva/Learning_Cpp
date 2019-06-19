@@ -12,9 +12,27 @@ using namespace std;
 const int WIDTH = 20;
 const int HEIGHT = 20;
 
-//coordenadas e scores
-int snakeX, snakeY, fruitX, fruitY, snakeTail = 0, score = 0;
-int tailX[100], tailY[100];
+//struck snake e struck fruta
+struct snakeObj{
+	int x, y;
+	int tail = 0;
+	int tailX[100], tailY[100];
+};
+
+struct fruitObj {
+	int x;
+	int y;
+};
+
+struct tailObj {
+	int PrevX, PrevY, tempX, tempY;
+};
+
+snakeObj snake;
+fruitObj fruit;
+tailObj tail;
+
+int score = 0;
 
 //tornar em numeros os inputs para condicional
 enum Directions { STOP = 0, RIGHT, LEFT, DOWN, UP };
@@ -47,10 +65,10 @@ void setup()
 {
 	gameOver = false;
 	keyPress = STOP;
-	snakeX = WIDTH / 2;
-	snakeY = WIDTH / 2;
-	fruitX = rand() % 20;
-	fruitY = rand() % 20;
+	snake.x = WIDTH / 2;
+	snake.y = WIDTH / 2;
+	fruit.x= rand() % 20;
+	fruit.y = rand() % 20;
 	score = 0;
 }
 //desenha o tabuleiro e os elementos
@@ -69,19 +87,19 @@ void draw()
 			if (j == 0 || j == WIDTH - 1) { cout << "#"; }
 
 			//obtem a posição da cobra e desenha
-			if (snakeX == j && snakeY == i)	{
+			if (snake.x == j && snake.y == i)	{
 				cout << "O";
 			} 
 			//obtem a posição da fruta e desenha
-			else  if (fruitX == j && fruitY == i) {
+			else  if (fruit.x == j && fruit.y == i) {
 				cout << "F";
 			} 
 			//obtem a posição da cauda da cobra , e dos espaços em branco
 			else {
 				bool printer = false;
-				for (int coord = 0; coord < snakeTail; coord++) {
+				for (int coord = 0; coord < snake.tail; coord++) {
 						
-					if (tailX[coord] == j && tailY[coord] == i)
+					if (snake.tailX[coord] == j && snake.tailY[coord] == i)
 					{
 						cout << "x";
 						printer = true;
@@ -130,55 +148,54 @@ void input()
 			gameOver = true;
 			break;
 		}
-	}
-	
+	}	
 }
 
 void logic()
 {
-	int tailPrevX, tailPrevY, tailPrev2X, tailPrev2Y; //variaveis para a cauda, a posição depois da cabeça e o temp que actualiza o valor
-
+	//int tailPrevX, tailPrevY, tailPrev2X, tailPrev2Y; //variaveis para a cauda, a posição depois da cabeça e o temp que actualiza o valor
+	
 	//se a a cobra estiver na mesma posição da fruta, come-a
-	if (snakeX == fruitX && snakeY == fruitY) {
+	if (snake.x == fruit.x && snake.y == fruit.y) {
 		score += 5;
-		snakeTail++;
-		fruitX = rand() % 20;
-		fruitY = rand() % 20;
+		snake.tail++;
+		fruit.x = rand() % 20;
+		fruit.y = rand() % 20;
 	}
 
 	// o prev fica com a ultima posição da cobra
-	tailPrevX = snakeX; 
-	tailPrevY = snakeY;
+	tail.PrevX = snake.x; 
+	tail.PrevY = snake.y;
 
 	//loop para aumentar a cobra e actualizar a array com a informação da mesma
 	//prev2X fica com o valor actual do iterador, o iterador escreve a posição anterior da cabeça da cobra, e o prev fica 
 	//com o valor actual da tailx[i]
-	for (int i = 0; i < snakeTail; i++)
+	for (int i = 0; i < snake.tail; i++)
 	{
-		tailPrev2X = tailX[i]; 
-		tailPrev2Y = tailY[i];
-		tailX[i] = tailPrevX;
-		tailY[i] = tailPrevY;
-		tailPrevX = tailPrev2X; 
-		tailPrevY = tailPrev2Y;
+		tail.tempX = snake.tailX[i]; 
+		tail.tempY = snake.tailY[i];
+		snake.tailX[i] = tail.PrevX;
+		snake.tailY[i] = tail.PrevY;
+		tail.PrevX = tail.tempX; 
+		tail.PrevY = tail.tempY;
 	}
 
 	switch (keyPress)
 	{
 		case UP:
-		snakeY--;
+		snake.y--;
 		break;
 
 		case LEFT:
-		snakeX--;
+		snake.x--;
 		break;
 
 		case RIGHT:
-		snakeX++;
+		snake.x++;
 		break;
 
 		case DOWN:
-		snakeY++;
+		snake.y++;
 		break;
 
 		default:
