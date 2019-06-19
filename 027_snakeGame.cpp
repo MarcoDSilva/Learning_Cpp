@@ -153,8 +153,7 @@ void input()
 
 void logic()
 {
-	//int tailPrevX, tailPrevY, tailPrev2X, tailPrev2Y; //variaveis para a cauda, a posição depois da cabeça e o temp que actualiza o valor
-	
+
 	//se a a cobra estiver na mesma posição da fruta, come-a
 	if (snake.x == fruit.x && snake.y == fruit.y) {
 		score += 5;
@@ -168,7 +167,7 @@ void logic()
 	tail.PrevY = snake.y;
 
 	//loop para aumentar a cobra e actualizar a array com a informação da mesma
-	//prev2X fica com o valor actual do iterador, o iterador escreve a posição anterior da cabeça da cobra, e o prev fica 
+	//tailTemp fica com o valor actual do iterador, o iterador escreve a posição anterior da cabeça da cobra, e o prev fica 
 	//com o valor actual da tailx[i]
 	for (int i = 0; i < snake.tail; i++)
 	{
