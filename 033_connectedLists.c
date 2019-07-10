@@ -1,6 +1,6 @@
 //listas ligadas, exercicios
 //by ms
-//08-07-2019
+//08-07-2019 - 10-07-2019
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,34 +31,43 @@ int main (){
 
     node head = NULL;
     node tail = NULL;
+    node aux = NULL;
 
-    // if null
+    node novoNode = cria_node(10);
+    
+    // if null, cria um node
     if(head == NULL)
     {
-        head = cria_node(10);
+        head = novoNode;
         tail = head;
     } 
-/*    else 
+    else 
     {
         //--------------HEAD INSERTION
-        if()
+        if(novoNode->dados <= head->dados)
         {
             //head insertion
+            novoNode->proximo = head;
+            head = novoNode;
         } 
         else 
         {
             //-----------TAIL INSERTION
-            if(){
+            if(novoNode->dados > tail->dados){
                 //tail insertion
+                tail->proximo = novoNode;
+                tail = novoNode;
             }
             //-----------BODY INSERTION
             else
             {
-                //body insertion   
-            }
-
+                //insert in the body
+                for(aux = head; aux->proximo->dados < novoNode->dados; aux = aux->proximo){}
+                novoNode->proximo = aux->proximo;
+                aux->proximo = novoNode;
+                }
         }
-*/
    
 return 0;
+    }
 }
