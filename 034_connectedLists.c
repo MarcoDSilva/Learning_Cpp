@@ -23,8 +23,8 @@ void insert_node(node **head, node **tail, node *newNode)
 	// --------- first element insertion -------
 	if(head == NULL)
 	{
-		head = newMode;
-		tail = newMode;
+		head = newNode;
+		tail = newNode;
 	} else {
 		// ----------- HEAD INSERTION ----------
 		if(newNode->data <= (*head)->data)
@@ -52,6 +52,8 @@ void insert_node(node **head, node **tail, node *newNode)
 }
 
 // ----------- create a node -------------------
+// allocates memmory
+//if the memory was allocated, creates the node, else doesn't
 node *create_node (int value) {
 
 	node *new = (node*)malloc(sizeof(node));
@@ -64,7 +66,6 @@ node *create_node (int value) {
 }
 
 // ----------- counter of nodes ----------------
-
 int nodeCounter(node *list)
 {
 	node *temp = NULL;
@@ -73,6 +74,72 @@ int nodeCounter(node *list)
 	for(temp = list, total = 0; temp != NULL; temp = temp->next)
 	{
 		total++;
+	}
+}
+
+//------------ node remover --------------------
+int remove_node (node **head, node **tail, int pos)
+{
+	node *temp = NULL;
+	int temp_pos = 0;
+
+	//-------- if the list is empty ------------
+	if(*head == NULL) { return -1; } 
+	else 
+	{
+		// ----- the position is invalid ------
+		if (pos < 1 || pos > count(*head)) { return - 2;}
+		else
+		{
+			// --- removing if the element is alone -----
+			if(count(*head) == 1) 
+			{
+				*head = NULL;
+				*tail = NULL;
+			} 
+			else 
+			{
+				//------ the head is being removed --------
+				if(pos == 1)
+				{
+					*head = (*head)->next;
+				}
+				else
+				{
+					if(pos == count(*head))
+					{
+						//------ tail removal -------------
+						temp = *head;
+						for(temp_pos = 1; temp_pos < pos - 1; temp_pos++)
+						{
+							temp = temp->next;
+						}
+						temp->next;
+					}
+					//------------ body removal--------------
+					else
+					{
+						temp = *head;
+						for(temp_pos = 1; temp_pos < pos - 1; temp_pos++)
+						{
+							temp = temp->next;
+						}
+						temp->next = temp->next->next;
+					}
+				}
+			}
+		}
+		return 1;
+	}
+}
+
+//show list 
+void show_list(node *list)
+{
+	node *temp = NULL;
+	for(temp = list; list != NULL; list = list->next)
+	{
+		printf("\n%d", temp->data);
 	}
 }
 
